@@ -46,6 +46,7 @@ defmodule Streamers do
 
   defp do_extract_m3u8(pid, dir, stream_inf, path, acc) do
     # #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=110000
+    # pattern matching
     << "#EXT-X-STREAM-INF:PROGRAM-ID=", program_id, ",BANDWIDTH=", bandwidth :: binary >> = stream_inf
     path = Path.join(dir, path |> String.trim)
     record = streamers_record(program_id: program_id - ?0, path: path, bandwidth: :erlang.binary_to_integer(String.trim(bandwidth)))
